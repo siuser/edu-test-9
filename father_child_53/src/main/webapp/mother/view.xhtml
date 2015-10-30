@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{motherBean.id}'/>
+		<f:event type="preRenderView" listener='#{motherBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Mother"/>
+
+	<ui:define name="header">
+		Mother
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Mother
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="motherBeanMotherName" value="Name:"/>
+			<h:outputText id="motherBeanMotherName" value="#{motherBean.mother.name}"/>
+			<h:outputText/>
+			<h:outputLabel for="motherBeanMotherChilds" value="Childs:"/>
+			<h:dataTable id="motherBeanMotherChilds" styleClass="data-table" value="#{forgeview:asList(motherBean.mother.childs)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name 2"/>
+					</f:facet>
+					<h:link outcome="/child/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemName2" value="#{_item.name2}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

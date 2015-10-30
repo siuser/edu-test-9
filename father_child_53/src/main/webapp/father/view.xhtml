@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{fatherBean.id}'/>
+		<f:event type="preRenderView" listener='#{fatherBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Father"/>
+
+	<ui:define name="header">
+		Father
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Father
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="fatherBeanFatherName1" value="Name 1:"/>
+			<h:outputText id="fatherBeanFatherName1" value="#{fatherBean.father.name1}"/>
+			<h:outputText/>
+			<h:outputLabel for="fatherBeanFatherName2" value="Name 2:"/>
+			<h:outputText id="fatherBeanFatherName2" value="#{fatherBean.father.name2}"/>
+			<h:outputText/>
+			<h:outputLabel for="fatherBeanFatherIsTrue1" value="Is True 1:"/>
+			<h:outputText id="fatherBeanFatherIsTrue1" value="#{fatherBean.father.isTrue1}"/>
+			<h:outputText/>
+			<h:outputLabel for="fatherBeanFatherValue1" value="Value 1:"/>
+			<h:outputText id="fatherBeanFatherValue1" value="#{fatherBean.father.value1}"/>
+			<h:outputText/>
+			<h:outputLabel for="fatherBeanFatherTextContent1" value="Text Content 1:"/>
+			<h:inputTextarea id="fatherBeanFatherTextContent1" value="#{fatherBean.father.textContent1}"/>
+			<h:outputText/>
+			<h:outputLabel for="fatherBeanFatherChilds" value="Childs:"/>
+			<h:dataTable id="fatherBeanFatherChilds" styleClass="data-table" value="#{forgeview:asList(fatherBean.father.childs)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name 2"/>
+					</f:facet>
+					<h:link outcome="/child/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemName2" value="#{_item.name2}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

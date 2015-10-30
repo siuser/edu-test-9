@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{fatherBean.page}'/>
+		<f:event type="preRenderView" listener='#{fatherBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Father entities"/>
+
+	<ui:define name="header">
+		Father
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Father entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="fatherBeanExampleName1" value="Name 1:"/>
+						<h:panelGroup>
+							<h:inputText id="fatherBeanExampleName1" maxLength="100" value="#{fatherBean.example.name1}"/>
+							<h:message for="fatherBeanExampleName1" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="fatherBeanExampleName2" value="Name 2:"/>
+						<h:panelGroup>
+							<h:inputText id="fatherBeanExampleName2" maxLength="100" value="#{fatherBean.example.name2}"/>
+							<h:message for="fatherBeanExampleName2" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="fatherBeanExampleIsTrue1" value="Is True 1:"/>
+						<h:panelGroup>
+							<h:selectOneMenu id="fatherBeanExampleIsTrue1" value="#{fatherBean.example.isTrue1}">
+								<f:selectItem/>
+								<f:selectItem itemLabel="Yes" itemValue="true"/>
+								<f:selectItem itemLabel="No" itemValue="false"/>
+							</h:selectOneMenu>
+							<h:message for="fatherBeanExampleIsTrue1" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="fatherBeanExampleTextContent1" value="Text Content 1:"/>
+						<h:panelGroup>
+							<h:inputTextarea id="fatherBeanExampleTextContent1" value="#{fatherBean.example.textContent1}"/>
+							<h:message for="fatherBeanExampleTextContent1" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{fatherBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{fatherBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="fatherBeanPageItems" styleClass="data-table" value="#{fatherBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name 1"/>
+					</f:facet>
+					<h:link outcome="/father/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemName1" value="#{_item.name1}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name 2"/>
+					</f:facet>
+					<h:link outcome="/father/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemName2" value="#{_item.name2}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{fatherBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

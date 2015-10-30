@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{childBean.id}'/>
+		<f:event type="preRenderView" listener='#{childBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Child"/>
+
+	<ui:define name="header">
+		Child
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty childBean.id}'>
+				Edit existing Child
+			</c:when>
+			<c:otherwise>
+				Create a new Child
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="childBeanChildFather" value="Father:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{fatherBean.converter}" id="childBeanChildFather" value="#{childBean.child.father}">
+						<f:selectItem/>
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{fatherBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="childBeanChildFather" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildMother" value="Mother:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{motherBean.converter}" id="childBeanChildMother" value="#{childBean.child.mother}">
+						<f:selectItem/>
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{motherBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="childBeanChildMother" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildName1" value="Name 1:"/>
+				<h:panelGroup>
+					<h:inputText id="childBeanChildName1" maxLength="100" value="#{childBean.child.name1}"/>
+					<h:message for="childBeanChildName1" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildName2" value="Name 2:"/>
+				<h:panelGroup>
+					<h:inputText id="childBeanChildName2" maxLength="100" required="true" value="#{childBean.child.name2}"/>
+					<h:message for="childBeanChildName2" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="childBeanChildValue1" value="Value 1:"/>
+				<h:panelGroup>
+					<h:inputText id="childBeanChildValue1" value="#{childBean.child.value1}"/>
+					<h:message for="childBeanChildValue1" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildValue2" value="Value 2:"/>
+				<h:panelGroup>
+					<h:inputText id="childBeanChildValue2" value="#{childBean.child.value2}"/>
+					<h:message for="childBeanChildValue2" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildIsTrue1" value="Is True 1:"/>
+				<h:panelGroup>
+					<h:selectOneMenu id="childBeanChildIsTrue1" value="#{childBean.child.isTrue1}">
+						<f:selectItem/>
+						<f:selectItem itemLabel="Yes" itemValue="true"/>
+						<f:selectItem itemLabel="No" itemValue="false"/>
+					</h:selectOneMenu>
+					<h:message for="childBeanChildIsTrue1" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildIsTrue2" value="Is True 2:"/>
+				<h:panelGroup>
+					<h:selectOneMenu id="childBeanChildIsTrue2" value="#{childBean.child.isTrue2}">
+						<f:selectItem/>
+						<f:selectItem itemLabel="Yes" itemValue="true"/>
+						<f:selectItem itemLabel="No" itemValue="false"/>
+					</h:selectOneMenu>
+					<h:message for="childBeanChildIsTrue2" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildTextContent1" value="Text Content 1:"/>
+				<h:panelGroup>
+					<h:inputTextarea id="childBeanChildTextContent1" value="#{childBean.child.textContent1}"/>
+					<h:message for="childBeanChildTextContent1" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildTextContent2" value="Text Content 2:"/>
+				<h:panelGroup>
+					<h:inputTextarea id="childBeanChildTextContent2" value="#{childBean.child.textContent2}"/>
+					<h:message for="childBeanChildTextContent2" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildValidFrom" value="Valid From:"/>
+				<h:panelGroup>
+					<h:inputText id="childBeanChildValidFrom" maxLength="19" value="#{childBean.child.validFrom}">
+						<f:convertDateTime pattern="MMM d, yyyy hh:mm:ss a" type="both"/>
+					</h:inputText>
+					<h:message for="childBeanChildValidFrom" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="childBeanChildValidTo" value="Valid To:"/>
+				<h:panelGroup>
+					<h:inputText id="childBeanChildValidTo" maxLength="19" value="#{childBean.child.validTo}">
+						<f:convertDateTime pattern="MMM d, yyyy hh:mm:ss a" type="both"/>
+					</h:inputText>
+					<h:message for="childBeanChildValidTo" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{childBeanHibernate.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty childBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{childBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{childBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
