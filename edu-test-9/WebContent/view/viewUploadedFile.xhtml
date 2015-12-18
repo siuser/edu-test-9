@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+<title>Evaluation Rules</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p>
+
+
+
+	<h3>Add Evaluation Rules</h3>
+
+
+	<h:form id="form" enctype="multipart/form-data">
+
+		<h:outputLabel for="inputFileId"
+			value="Browse to file you want to import evaluation rule(s) from:" />
+		<br></br>
+
+
+		<h:inputFile id="inputFileId"
+			value="#{evaluationRuleController.uploadedFile}">
+		</h:inputFile>
+
+		<br></br>
+
+		<h:commandButton id="uploadFileId"
+			action="#{evaluationRuleController.upload()}" value="Upload"
+			styleClass="register">
+			<!-- <f:setPropertyActionListener target="#{evaluationRuleController.viewHide}"
+						value="#{true}" /> -->
+		</h:commandButton>
+
+
+
+		<br />
+
+
+
+
+
+		<textarea readonly="readonly" id="textFileContentId" cols="100"
+			rows="10">#{evaluationRuleController.textFileContent}</textarea>
+
+
+
+
+
+
+		<h3>Evaluation rules from file</h3>
+
+		<h:panelGroup
+			rendered="#{empty evaluationRuleController.evaluationRuleList}">
+			<em>No registered evaluationRules.</em>
+		</h:panelGroup>
+		
+		<br></br><br></br>
+
+		<h:dataTable var="_evaluationRule"
+			value="#{evaluationRuleController.evaluationRuleList}"
+			rendered="#{not empty evaluationRuleController.evaluationRuleList}"
+			styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<!--  <input type="text" id="idEvaluationRule" name="idEvaluationRule"
+					value="#{_evaluationRule.idEvaluationRule}" />-->
+					#{_evaluationRule.idEvaluationRule}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Market rule Id</f:facet>
+				<!-- <input type="text" id="idMarketRule" name="idMarketRule"
+					value="#{_evaluationRule.marketRuleId}" /> -->
+			#{_evaluationRule.marketRuleId}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+			 #{_evaluationRule.description} 
+			</h:column>
+
+		</h:dataTable>
+
+
+
+
+		<h:commandButton id="AddBulkRuleRestAjax" type="button"
+			value="AddByRestAjax" onclick="addRule()">
+		</h:commandButton>
+
+		<h:commandButton id="AddBulkRuleRestAjaxId"
+			action="#{evaluationRuleController.addBulkEvaluationRuleRest()}"
+			value="AddByRest" styleClass="register">
+		</h:commandButton>
+
+		<h:commandButton id="CancelId" action="evaluationRuleList.xhtml"
+			value="Cancel" styleClass="register" />
+
+
+
+		<!--  </div>-->
+
+
+	</h:form>
+
+
+
+</body>
+</html>

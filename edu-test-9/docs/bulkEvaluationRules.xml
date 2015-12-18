@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<evaluationRules>
+    <evaluationRule>
+        <idEvaluationRule>2</idEvaluationRule>
+        <marketRuleId>2</marketRuleId>
+        <ruleConditions>
+            <idRuleCondition>2</idRuleCondition>
+            <vehicleAttributeName>engineCode</vehicleAttributeName>
+            <vehicleAttributeValue>E900A</vehicleAttributeValue>            
+        </ruleConditions>
+        <ruleConditions>
+            <idRuleCondition>3</idRuleCondition>
+            <vehicleAttributeName>model</vehicleAttributeName>
+            <vehicleAttributeValue>WR</vehicleAttributeValue>            
+        </ruleConditions>
+        <ruleActivities>
+            <idRuleActivity>2</idRuleActivity>
+            <vehicleAttributeName>model</vehicleAttributeName>
+            <vehicleAttributeValue>sport</vehicleAttributeValue>
+        </ruleActivities>        
+    </evaluationRule>    
+</evaluationRules>

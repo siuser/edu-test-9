@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"> 
+
+<head>
+<title>Evaluation Results</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p> 
+
+
+
+	<h3>Evaluation Results</h3>
+	<h:panelGroup
+		rendered="#{empty evaluationResultController.getAllEvaluationResultList()}">
+		<em>No registered evaluationResults.</em>
+	</h:panelGroup> 
+
+	<h:form>
+		<h:dataTable var="_evaluationResult" 	value="#{evaluationResultController.getAllEvaluationResultList()}"  
+			rendered="#{not empty evaluationResultController.getAllEvaluationResultList()}" 
+			styleClass="simpletablestyle"> 
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+			 #{_evaluationResult.idEvaluationResult}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Date</f:facet>
+			 #{_evaluationResult.dateOfEvaluation}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Vehicle Id</f:facet>
+			 #{_evaluationResult.vehicle.getIdVehicle()}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Rule Ids to be applied</f:facet>
+			 #{_evaluationResult.evaluationRuleIdsToBeApplied}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Rule Ids not in database</f:facet>
+			 #{_evaluationResult.evaluationRuleIdsNotInDatabase}
+			</h:column>
+			
+			<h:column>
+
+				<f:facet name="header">Action </f:facet>
+				<h:commandLink value="View"
+					action="/view/viewEvaluationResult.xhtml"> 
+					  <f:setPropertyActionListener target="#{configurationController.evaluationResult}"
+						value="#{_evaluationResult}" />
+
+				</h:commandLink>
+
+			</h:column>
+			
+			
+			
+			<!--  
+			
+			<h:column>
+			<f:facet name="header">REST URL</f:facet>
+			<a
+				href="#{request.contextPath}/rest/evaluationResults/#{_evaluationResult.idEvaluationResult}">/rest/evaluationResults/#{_evaluationResult.idEvaluationResult}</a>
+		</h:column>
+		
+		 <h:column>
+                <f:facet name="header">Action </f:facet>
+                <h:commandLink action="#{evaluationResultController.deleteEvaluationResultRest(_evaluationResult)}">
+						<f:param name="evaluationResultId" value="#{_evaluationResult.idEvaluationResult}"/>
+					<h:outputText id="deleteId" value="deleteByRest"/>
+						
+					</h:commandLink>
+            </h:column>
+		
+
+
+
+
+			<f:facet name="footer">
+            REST URL for all evaluationResults: <a
+					href="#{request.contextPath}/rest/evaluationResults">/rest/evaluationResults</a>
+			</f:facet>
+			
+			-->
+			
+		</h:dataTable>
+		
+		
+
+		
+		
+		
+	</h:form>
+	
+	
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"> 
+
+<head>
+<title>Evaluation Rules</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p> 
+
+
+
+	<h3>Evaluation Rules</h3>
+	<h:panelGroup
+		rendered="#{empty evaluationRuleController.getAllEvaluationRuleList()}">
+		<em>No registered evaluationRules.</em>
+	</h:panelGroup>
+
+	<h:form>
+		<h:dataTable var="_evaluationRule" 	value="#{evaluationRuleController.getAllEvaluationRuleList()}"  
+			rendered="#{not empty evaluationRuleController.getAllEvaluationRuleList()}" 
+			styleClass="simpletablestyle"> 
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+			 #{_evaluationRule.idEvaluationRule}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Market rule Id</f:facet>
+			 #{_evaluationRule.marketRuleId} 
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+			 #{_evaluationRule.description} 
+			</h:column>
+			
+			<h:column>
+			<f:facet name="header">REST URL</f:facet>
+			<a
+				href="#{request.contextPath}/rest/evaluationRules/#{_evaluationRule.idEvaluationRule}">/rest/evaluationRules/#{_evaluationRule.idEvaluationRule}</a>
+		</h:column>
+		
+		 <h:column>
+                <f:facet name="header">Action </f:facet>
+                <h:commandLink action="#{evaluationRuleController.deleteEvaluationRuleRest(_evaluationRule)}">
+						<f:param name="evaluationRuleId" value="#{_evaluationRule.idEvaluationRule}"/>
+					<h:outputText id="deleteId" value="deleteByRest"/>
+						
+					</h:commandLink>
+            </h:column>
+		
+
+
+
+
+			<f:facet name="footer">
+            REST URL for all evaluationRules: <a
+					href="#{request.contextPath}/rest/evaluationRules">/rest/evaluationRules</a>
+			</f:facet>
+		</h:dataTable>
+		
+		
+
+		
+			
+		<h:commandButton id="AddBatchRuleRest"
+			action="viewUploadedFile.xhtml" value="AddNewRules"
+			styleClass="register" />
+			
+			<h:commandButton id="GenerateRuleXmlFile"
+			action="evaluationRuleController.marshallingEvaluationRuleToXmlFile()" value="GenerateXmlFile"
+			styleClass="register" />
+		
+		
+		
+	</h:form>
+	
+	
+
+</body>
+</html>

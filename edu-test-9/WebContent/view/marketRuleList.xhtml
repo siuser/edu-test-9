@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+<title>View Market Rule list</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  --> 
+ <link rel="stylesheet" type="text/css" href="css/myStyle.css" /> 
+ 
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p>
+
+	<h2>Market rule list</h2>
+
+	
+	
+	<h:panelGroup rendered="#{empty marketRules}"> 
+		<em>No registered marketRules.</em>
+	</h:panelGroup>
+	<h:dataTable var="_marketRule" value="#{marketRuleController.allMarketRulesList}"
+		rendered="#{not empty marketRuleController.allMarketRulesList}" styleClass="simpletablestyle">
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+                #{_marketRule.idMarketRule}
+            </h:column>
+
+		<h:column>
+			<f:facet name="header">Country No</f:facet>
+                #{_marketRule.countryNumber}
+            </h:column>
+
+		<h:column>
+			<f:facet name="header">Branch</f:facet>
+                #{_marketRule.branch}
+            </h:column>
+ 
+		<h:column>
+			<f:facet name="header">Stock category</f:facet>
+                #{_marketRule.stockCategory}
+        </h:column>
+        
+        <h:column>
+			<f:facet name="header">Is active</f:facet>
+                #{_marketRule.isActive}
+        </h:column>
+
+
+
+		
+	</h:dataTable>
+	
+	
+	
+	
+	
+	<p></p>
+	<h:form id="marketRuleRegistration">
+	<h:outputLabel for="addMarketRulePanelGrid" value="Add new market rule" />
+		<h:panelGrid columns="3" columnClasses="titleCell" border="1" 
+		bgcolor="#E6E7E8" id="addMarketRulePanelGrid">
+
+
+			<h:outputLabel for="countryNumber" value="Country Number:" />
+			<h:inputText id="countryNumber"
+				value="#{marketRuleController.newMarketRule.countryNumber}" />
+			<h:message for="countryNumber" errorClass="invalid" />
+
+			<h:outputLabel for="branch" value="Branch:" />
+			<h:inputText id="branch" value="#{marketRuleController.newMarketRule.branch}" />
+			<h:message for="branch" errorClass="invalid" />
+
+
+			<h:outputLabel for="stockCategorySelect" value="Stock Category:" />
+			<h:selectOneMenu id="stockCategorySelect"
+				value="#{marketRuleController.newMarketRule.stockCategory}">
+				<f:selectItems value="#{marketRuleController.allStockCategoryAsStringList}" />
+			</h:selectOneMenu>
+			<h:message for="stockCategorySelect" errorClass="invalid" />
+
+			<h:outputLabel for="isActiveCheckbox" value="Is active" />
+			<h:selectBooleanCheckbox id="isActiveCheckbox"
+				value="#{marketRuleController.newMarketRule.isActive}">
+			</h:selectBooleanCheckbox>
+			<h:message for="isActiveCheckbox" errorClass="invalid" />
+	
+
+			<h:outputLabel for="register" value="" />
+				<h:commandButton id="register"
+					action="#{marketRuleController.registerMarketRule}" value="Register"
+					styleClass="register" />
+					
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+			</h:panelGrid>
+		
+	</h:form>
+
+
+
+</body>
+</html>

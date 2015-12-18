@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+<title>Evaluate vehicle config</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  --> 
+ <link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+ 
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p>
+
+	<h2>Vehicle evaluation, choosing rule group</h2>
+	
+	<h:outputLabel for="vehiclePaneGridId" value="Vehicle details:" />
+	<h:panelGrid id="vehiclePaneGridId" columns="2">
+	
+	<h:outputLabel for="vehicleId" value="Id:" />
+	<h:outputText id="vehicleId" value="#{configurationController.vehicle.idVehicle}"></h:outputText>
+	
+	<h:outputLabel for="vehicleCountryNumberId" value="Chassiss serial" />
+		<h:outputText id="vehicleChassisSerialId"
+			value="#{configurationController.vehicle.chassisSerial}"></h:outputText>
+
+	
+	
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{empty configurationController.getConfigKeyValueAsList()}">
+		<em>No registered groups in properties file</em>
+	</h:panelGroup>
+	<h:form id="ruleGroupRegistration">
+	<h:dataTable var="_evaluationRuleConfig" value="#{configurationController.getConfigKeyValueAsList()}"
+		rendered="#{not empty configurationController.getConfigKeyValueAsList()}" styleClass="simpletablestyle">
+		<h:column>
+			<f:facet name="header">Group name</f:facet>
+                #{_evaluationRuleConfig.get(0)}
+            </h:column>
+            
+            <h:column>
+			<f:facet name="header">Rules Ids</f:facet>
+                #{_evaluationRuleConfig.get(1)}
+            </h:column>
+
+			<h:column>
+			<f:facet name="header">Select</f:facet>
+			<h:selectBooleanCheckbox name="selectRuleGroup" value="#{configurationController.checkboxesStatus[_evaluationRuleConfig.get(0)]}" ></h:selectBooleanCheckbox>
+                
+            </h:column>
+            
+            
+
+
+
+		
+	</h:dataTable>
+	<h:outputLabel for="register" value="" />
+				<h:commandButton id="register"
+					action="#{configurationController.evaluate()}" value="Evaluate"
+					styleClass="register" >
+				<f:setPropertyActionListener target="#{vehicleController.vehicle}"
+						value="#{configurationController.vehicle}" />	
+						<f:param name="vehicleId" value="#{configurationController.vehicle.idVehicle}" ></f:param>
+					
+				</h:commandButton>					
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
+	
+	
+	
+	
+	<p></p>
+	
+	
+	
+	
+	
+	<p></p>
+	
+	
+		
+	</h:form>
+
+
+
+</body>
+</html>

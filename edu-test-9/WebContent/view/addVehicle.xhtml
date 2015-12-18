@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"> 
+
+<head>
+<title>Add Vehicle </title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p>
+
+
+	<h3>Add new Vehicle</h3>
+	
+	<p></p>
+
+
+	<h:form id="vehicleRegistration">
+		<h:outputLabel for="addVehiclePanelGrid" value="New vehicle:" />
+		<h:panelGrid columns="3" columnClasses="titleCell" border="1"
+			bgcolor="#E6E7E8" id="addVehiclePanelGrid">
+
+			<h:outputLabel for="countryNumberId" value="Country Number:" />
+			<h:inputText id="countryNumberId" value="#{vehicleController.newVehicle.countryNumber}" />
+			<h:message for="countryNumberId" errorClass="invalid" />
+
+			<h:outputLabel for="branchId" value="Branch:" />
+			<h:inputText id="branchId" value="#{vehicleController.newVehicle.branch}" />
+			<h:message for="branchId" errorClass="invalid" />
+
+
+			<h:outputLabel for="stockCategorySelectId" value="Stock Category:" />
+			<h:selectOneMenu id="stockCategorySelectId"
+				value="#{vehicleController.newVehicle.stockCategory}">
+				<f:selectItems value="#{vehicleController.allStockCategoryAsStringList}" />
+			</h:selectOneMenu>
+			<h:message for="stockCategorySelectId" errorClass="invalid" />
+
+			<h:outputLabel for="chassisSerialId" value="Chassis serial:" />
+			<h:inputText id="chassisSerialId" value="#{vehicleController.newVehicle.chassisSerial}" />
+			<h:message for="chassisSerialId" errorClass="invalid" />
+			
+			<h:outputLabel for="vehicleModelId" value="Vehicle model:" />
+			<h:inputText id="vehicleModelId" value="#{vehicleController.newVehicle.model}" />
+			<h:message for="vehicleModelId" errorClass="invalid" />
+			
+			<h:outputLabel for="vehicleClasseId" value="Vehicle classe" />
+			<h:inputText id="vehicleClasseId" value="#{vehicleController.newVehicle.classe}" />
+			<h:message for="vehicleClasseId" errorClass="invalid" />
+			
+			<h:outputLabel for="engineCodeId" value="Engine code:" />
+			<h:inputText id="engineCodeId" value="#{vehicleController.newVehicle.engineCode}" />
+			<h:message for="engineCodeId" errorClass="invalid" />
+			
+			<h:outputLabel for="engineFuelTypeId" value="Engine fuel type:" />
+			<h:inputText id="engineFuelTypeId" value="#{vehicleController.newVehicle.engineFuelType}" />
+			<h:message for="engineFuelTypeId" errorClass="invalid" />
+			
+			<h:commandButton id="register"
+				action="#{vehicleController.register}" value="Register"
+				styleClass="register" />
+			
+			<h:commandButton id="cancel"
+				action="/view/vehicleList.xhtml" value="Cancel"
+				styleClass="register" />
+			
+			<h:outputLabel for="register" value="" />
+			
+
+
+
+
+		</h:panelGrid>
+
+
+	</h:form>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+<head>
+<title>View Evaluation result</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+
+</head>
+
+
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p>
+
+	<h2>Evaluation result</h2>
+	<p></p>
+
+
+	<h:panelGrid id="panelGridEvaluationResultId" columns="2"
+		columnClasses="titleCell">
+
+		<h:outputLabel for="idId" value="Evaluation result Id:" /> 
+		<h:outputText id="idId"
+			value="#{configurationController.evaluationResult.idEvaluationResult}">
+		</h:outputText>
+
+		<h:outputLabel for="vehicleId" value="Vehicle Id:" />
+		<h:outputText id="vehicleId"
+			value="#{configurationController.evaluationResult.vehicle.idVehicle}"> 
+		</h:outputText>
+
+		<h:outputLabel for="evaluationRulesAppliedId" value="Evaluation rules to be applied:" />
+		<h:outputText id="evaluationRulesAppliedId"
+			value="#{configurationController.evaluationResult.evaluationRuleIdsToBeApplied}"> 
+		</h:outputText>
+		
+		<h:outputLabel for="evaluationRulesNotInDbId" value="Evaluation rules not in database:" />
+		<h:outputText id="evaluationRulesNotInDbId"
+			value="#{configurationController.evaluationResult.evaluationRuleIdsNotInDatabase}">  
+		</h:outputText>
+
+	</h:panelGrid>
+
+
+	<p></p>
+
+
+
+
+
+	<h2>Evaluation result details for every rule applied</h2>
+
+
+	<h:panelGroup
+		rendered="#{empty configurationController.evaluationResult.evaluationResultDetails}">
+		<em>No registered Evaluation Result Details</em>
+	</h:panelGroup>
+	<h:dataTable var="_item"
+		value="#{configurationController.evaluationResult.getEvaluationResultDetails()}"
+		rendered="#{not empty configurationController.evaluationResult.getEvaluationResultDetails()}"
+		styleClass="simpletablestyle">
+		
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{_item.idEvaluationResultDetail}"></h:outputText>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Rule Id</f:facet>
+			<h:outputText value="#{_item.idEvaluationRule}"></h:outputText>
+		</h:column>
+		
+		
+		<h:column>
+			<f:facet name="header">Rule status</f:facet>
+			<h:outputText value="#{_item.ruleStatus}"></h:outputText>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Message</f:facet>
+			<h:inputTextarea value="#{_item.message}" readonly="true" cols="70"
+				rows="4"></h:inputTextarea>
+
+		</h:column>
+
+
+
+
+
+
+	</h:dataTable>
+
+
+
+
+
+
+
+</body>
+</html>

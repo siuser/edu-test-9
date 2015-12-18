@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"> 
+
+<head>
+<title>Vehicle List</title>
+<!--<h:outputStylesheet name="css/myStyle.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myStyle.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/myStyle.css" />  -->
+<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+
+</head>
+
+<body>
+	<p>
+		<h:link value="Home" outcome="/index.xhtml" />
+	</p>
+
+
+	<h3>Vehicle list</h3>
+	<h:panelGroup rendered="#{empty vehicleController.getAllVehicle()}">
+		<em>No registered vehicles</em>
+	</h:panelGroup>
+	<h:form>
+		<h:dataTable var="_vehicle" value="#{vehicleController.getAllVehicle()}"
+			rendered="#{not empty vehicleController.getAllVehicle()}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+                #{_vehicle.idVehicle}
+            </h:column>
+
+			<h:column>
+				<f:facet name="header"> Country no </f:facet>
+                #{_vehicle.countryNumber}
+            </h:column>
+
+			<h:column>
+				<f:facet name="header"> Branch </f:facet>
+                #{_vehicle.branch}
+            </h:column>
+
+			<h:column>
+				<f:facet name="header"> Stock ctg </f:facet>
+                #{_vehicle.stockCategory}
+            </h:column>
+
+			<h:column>
+				<f:facet name="header"> Chassis no </f:facet>
+                #{_vehicle.chassisSerial}
+            </h:column>
+            
+            <h:column>
+				<f:facet name="header"> Model </f:facet>
+                #{_vehicle.model}
+            </h:column>
+            
+            <h:column>
+				<f:facet name="header"> Classe </f:facet>
+                #{_vehicle.classe}
+            </h:column>
+
+			<h:column>
+				<f:facet name="header"> Engine code </f:facet>
+                #{_vehicle.engineCode}
+            </h:column>
+            
+            <h:column>
+				<f:facet name="header"> Engine fuel type </f:facet>
+                #{_vehicle.engineFuelType}
+            </h:column>
+
+			<h:column>
+
+				<f:facet name="header">Action </f:facet>
+				<h:commandLink value="Evaluate"
+					action="/view/evaluateVehicleConfig.xhtml"> 
+					<f:setPropertyActionListener target="#{configurationController.vehicle}"
+						value="#{_vehicle}" />
+
+				</h:commandLink>
+
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+
+
+
+	<p></p>
+
+
+	<h:form id="vehicleRegistration">
+		
+			
+			<h:commandButton id="register"
+				action="/view/addVehicle.xhtml" value="AddVehicle"
+				styleClass="register" />
+
+			
+
+
+
+
+	</h:form>
+
+
+
+
+
+
+</body>
+</html>
